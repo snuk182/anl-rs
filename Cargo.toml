@@ -1,0 +1,18 @@
+[package]
+name = "anl"
+version = "0.1.0"
+authors = ["Serhii Plyhun <snuk188@gmail.com>"]
+keywords = ["noise", "generator", "fractal", "random", "cellular"]
+description = "Accidental Noise Library port for Rust. "
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/snuk182/anl-rs.git"
+homepage = "https://github.com/snuk182/anl"
+
+[lib]
+name = "anl"
+path = "src/lib.rs"
+
+[dependencies]
+time = "~0.1"
+lazy_static = "~0.2"
