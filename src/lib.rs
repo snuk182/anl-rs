@@ -9,27 +9,36 @@ pub use noise_gen::{value_noise_2d, value_noise_3d, value_noise_4d, value_noise_
 mod implicit_base;
 pub use implicit_base::{ScalarParameter, ImplicitModule, MAX_SOURCES};
 
-pub mod implicit_cache;
-pub mod implicit_auto_correct;
-pub mod implicit_bias;
-pub mod implicit_blend;
-pub mod implicit_cellular;
-pub mod implicit_combiner;
-pub mod implicit_fractal;
-pub mod implicit_gradient;
-pub mod implicit_scale_domain;
-pub mod implicit_scale_offset;
-pub mod implicit_select;
-pub mod implicit_translate_domain;
+mod implicit_cache;
+mod implicit_auto_correct;
+mod implicit_bias;
+mod implicit_blend;
+mod implicit_cellular;
+mod implicit_combiner;
+mod implicit_fractal;
+mod implicit_gradient;
+mod implicit_scale_domain;
+mod implicit_scale_offset;
+mod implicit_select;
+mod implicit_translate_domain;
+mod implicit_basis_function;
+
+pub use implicit_cache::*;
+pub use implicit_auto_correct::*;
+pub use implicit_bias::*;
+pub use implicit_blend::*;
+pub use implicit_cellular::*;
+pub use implicit_combiner::*;
+pub use implicit_fractal::*;
+pub use implicit_gradient::*;
+pub use implicit_scale_domain::*;
+pub use implicit_scale_offset::*;
+pub use implicit_select::*;
+pub use implicit_translate_domain::*;
+pub use implicit_basis_function::*;
 
 pub mod utility;
 
 pub mod cellular_gen;
 pub mod random_gen;
-pub mod implicit_basis_function;
 
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {}
-}

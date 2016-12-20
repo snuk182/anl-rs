@@ -42,7 +42,9 @@ impl LCG {
 
 impl PRNG for LCG {
     fn get(&mut self) -> u32 {
-        self.m_state = 69069 * self.m_state + 362437;
+    	use std::num::Wrapping;
+    	
+        self.m_state = (Wrapping(69069) * Wrapping(self.m_state) + Wrapping(362437)).0;
         self.m_state
     }
     fn set_seed(&mut self, seed: u32) {

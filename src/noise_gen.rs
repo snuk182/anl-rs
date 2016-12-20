@@ -1335,14 +1335,16 @@ pub fn quintic_interp(t: f64) -> f64 {
 
 #[inline(always)]
 fn fnv32_a_buf(buf: &[u32]) -> u32 {
-	let mut hval = FNV_32_INIT;
+	use std::num::Wrapping;
+	
+	let mut hval = Wrapping(FNV_32_INIT);
 
 	for v in buf {
-		hval ^= *v;
-		hval *= FNV_32_PRIME;
+		hval ^= Wrapping(*v);
+		hval *= Wrapping(FNV_32_PRIME);
 	}
 
-	hval
+	hval.0
 }
 
 fn xor_fold_hash(hash: u32) -> u8 {
@@ -1764,9 +1766,11 @@ fn add_dist(f: &mut [f64], disp: &mut [f64], testdist: f64, testdisp: f64) {
 			index = index - 1
 		}
 
-		for i in (index-1..3).rev() {
-			f[i+1] = f[i];
-			disp[i+1] = disp[i];
+		if index > 4 {
+			for i in (index-1..3).rev() {
+				f[i+1] = f[i];
+				disp[i+1] = disp[i];
+			}
 		}
 
 		f[index] = testdist;
