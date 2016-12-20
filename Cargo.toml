@@ -16,3 +16,6 @@ path = "src/lib.rs"
 [dependencies]
 time = "~0.1"
 lazy_static = "~0.2"
+
+[dev-dependencies]
+image = "~0.10"

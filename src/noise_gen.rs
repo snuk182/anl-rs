@@ -1763,14 +1763,14 @@ fn add_dist(f: &mut [f64], disp: &mut [f64], testdist: f64, testdisp: f64) {
 		let mut index = 3;
 
 		while index > 0 && testdist < f[index-1] {
-			index = index - 1
+			index -= 1;
 		}
-
-		if index > 4 {
-			for i in (index-1..3).rev() {
-				f[i+1] = f[i];
-				disp[i+1] = disp[i];
-			}
+		
+		let mut i = 3;
+		while i > index {
+			i -= 1;
+			f[i+1] = f[i];
+			disp[i+1] = disp[i];
 		}
 
 		f[index] = testdist;
