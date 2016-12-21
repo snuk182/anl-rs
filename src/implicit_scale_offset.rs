@@ -62,4 +62,8 @@ impl ImplicitModule for ImplicitScaleOffset {
     fn spacing(&self) -> f64 {
         self.base.spacing
     }
+
+    fn set_deriv_spacing(&mut self, s: f64) {
+        self.base.spacing = s;
+    }
 }

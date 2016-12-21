@@ -1008,12 +1008,8 @@ impl ImplicitFractal {
             if let Some(ref ii) = self.source[i] {
                 let mut bii = ii.borrow_mut();
                 let n = bii.get_2d(x + self.offset * dx_sum, y + self.offset * dy_sum);
-                let dx = get_dx_2(&mut *bii,
-                                  x + self.offset * dx_sum,
-                                  y + self.offset * dy_sum);
-                let dy = get_dy_2(&mut *bii,
-                                  x + self.offset * dx_sum,
-                                  y + self.offset * dy_sum);
+                let dx = bii.get_dx_2(x + self.offset * dx_sum, y + self.offset * dy_sum);
+                let dy = bii.get_dy_2(x + self.offset * dx_sum, y + self.offset * dy_sum);
                 sum += amp * (1.0 - n.abs());
                 dx_sum += amp * dx * -n;
                 dy_sum += amp * dy * -n;
@@ -1050,26 +1046,22 @@ impl ImplicitFractal {
                                    y + self.offset * dy_sum,
                                    z + self.offset * dz_sum,
                                    w + self.offset * dw_sum);
-                let dx = get_dx_4(&mut *bii,
-                                  x + self.offset * dx_sum,
-                                  y + self.offset * dy_sum,
-                                  z + self.offset * dz_sum,
-                                  w + self.offset * dw_sum);
-                let dy = get_dy_4(&mut *bii,
-                                  x + self.offset * dx_sum,
-                                  y + self.offset * dy_sum,
-                                  z + self.offset * dz_sum,
-                                  w + self.offset * dw_sum);
-                let dz = get_dz_4(&mut *bii,
-                                  x + self.offset * dx_sum,
-                                  y + self.offset * dy_sum,
-                                  z + self.offset * dz_sum,
-                                  w + self.offset * dw_sum);
-                let dw = get_dw_4(&mut *bii,
-                                  x + self.offset * dx_sum,
-                                  y + self.offset * dy_sum,
-                                  z + self.offset * dz_sum,
-                                  w + self.offset * dw_sum);
+                let dx = bii.get_dx_4(x + self.offset * dx_sum,
+                                      y + self.offset * dy_sum,
+                                      z + self.offset * dz_sum,
+                                      w + self.offset * dw_sum);
+                let dy = bii.get_dy_4(x + self.offset * dx_sum,
+                                      y + self.offset * dy_sum,
+                                      z + self.offset * dz_sum,
+                                      w + self.offset * dw_sum);
+                let dz = bii.get_dz_4(x + self.offset * dx_sum,
+                                      y + self.offset * dy_sum,
+                                      z + self.offset * dz_sum,
+                                      w + self.offset * dw_sum);
+                let dw = bii.get_dw_4(x + self.offset * dx_sum,
+                                      y + self.offset * dy_sum,
+                                      z + self.offset * dz_sum,
+                                      w + self.offset * dw_sum);
                 sum += amp * (1.0 - n.abs());
                 dx_sum += amp * dx * -n;
                 dy_sum += amp * dy * -n;
@@ -1106,18 +1098,15 @@ impl ImplicitFractal {
                 let n = bii.get_3d(x + self.offset * dx_sum,
                                    y + self.offset * dy_sum,
                                    z + self.offset * dz_sum);
-                let dx = get_dx_3(&mut *bii,
-                                  x + self.offset * dx_sum,
-                                  y + self.offset * dy_sum,
-                                  z + self.offset * dz_sum);
-                let dy = get_dy_3(&mut *bii,
-                                  x + self.offset * dx_sum,
-                                  y + self.offset * dy_sum,
-                                  z + self.offset * dz_sum);
-                let dz = get_dz_3(&mut *bii,
-                                  x + self.offset * dx_sum,
-                                  y + self.offset * dy_sum,
-                                  z + self.offset * dz_sum);
+                let dx = bii.get_dx_3(x + self.offset * dx_sum,
+                                      y + self.offset * dy_sum,
+                                      z + self.offset * dz_sum);
+                let dy = bii.get_dy_3(x + self.offset * dx_sum,
+                                      y + self.offset * dy_sum,
+                                      z + self.offset * dz_sum);
+                let dz = bii.get_dz_3(x + self.offset * dx_sum,
+                                      y + self.offset * dy_sum,
+                                      z + self.offset * dz_sum);
                 sum += amp * (1.0 - n.abs());
                 dx_sum += amp * dx * -n;
                 dy_sum += amp * dy * -n;
@@ -1164,48 +1153,42 @@ impl ImplicitFractal {
                                    w + self.offset * dw_sum,
                                    u + self.offset * du_sum,
                                    v + self.offset * dv_sum);
-                let dx = get_dx_6(&mut *bii,
-                                  x + self.offset * dx_sum,
-                                  y + self.offset * dy_sum,
-                                  z + self.offset * dx_sum,
-                                  w + self.offset * dw_sum,
-                                  u + self.offset * du_sum,
-                                  v + self.offset * dv_sum);
-                let dy = get_dy_6(&mut *bii,
-                                  x + self.offset * dx_sum,
-                                  y + self.offset * dy_sum,
-                                  z + self.offset * dz_sum,
-                                  w + self.offset * dw_sum,
-                                  u + self.offset * du_sum,
-                                  v + self.offset * dv_sum);
-                let dz = get_dz_6(&mut *bii,
-                                  x + self.offset * dx_sum,
-                                  y + self.offset * dy_sum,
-                                  z + self.offset * dz_sum,
-                                  w + self.offset * dw_sum,
-                                  u + self.offset * du_sum,
-                                  v + self.offset * dv_sum);
-                let dw = get_dw_6(&mut *bii,
-                                  x + self.offset * dx_sum,
-                                  y + self.offset * dy_sum,
-                                  z + self.offset * dz_sum,
-                                  w + self.offset * dw_sum,
-                                  u + self.offset * du_sum,
-                                  v + self.offset * dv_sum);
-                let du = get_du_6(&mut *bii,
-                                  x + self.offset * dx_sum,
-                                  y + self.offset * dy_sum,
-                                  z + self.offset * dz_sum,
-                                  w + self.offset * dw_sum,
-                                  u + self.offset * du_sum,
-                                  v + self.offset * dv_sum);
-                let dv = get_dv_6(&mut *bii,
-                                  x + self.offset * dx_sum,
-                                  y + self.offset * dy_sum,
-                                  z + self.offset * dz_sum,
-                                  w + self.offset * dw_sum,
-                                  u + self.offset * du_sum,
-                                  v + self.offset * dv_sum);
+                let dx = bii.get_dx_6(x + self.offset * dx_sum,
+                                      y + self.offset * dy_sum,
+                                      z + self.offset * dx_sum,
+                                      w + self.offset * dw_sum,
+                                      u + self.offset * du_sum,
+                                      v + self.offset * dv_sum);
+                let dy = bii.get_dy_6(x + self.offset * dx_sum,
+                                      y + self.offset * dy_sum,
+                                      z + self.offset * dz_sum,
+                                      w + self.offset * dw_sum,
+                                      u + self.offset * du_sum,
+                                      v + self.offset * dv_sum);
+                let dz = bii.get_dz_6(x + self.offset * dx_sum,
+                                      y + self.offset * dy_sum,
+                                      z + self.offset * dz_sum,
+                                      w + self.offset * dw_sum,
+                                      u + self.offset * du_sum,
+                                      v + self.offset * dv_sum);
+                let dw = bii.get_dw_6(x + self.offset * dx_sum,
+                                      y + self.offset * dy_sum,
+                                      z + self.offset * dz_sum,
+                                      w + self.offset * dw_sum,
+                                      u + self.offset * du_sum,
+                                      v + self.offset * dv_sum);
+                let du = bii.get_du_6(x + self.offset * dx_sum,
+                                      y + self.offset * dy_sum,
+                                      z + self.offset * dz_sum,
+                                      w + self.offset * dw_sum,
+                                      u + self.offset * du_sum,
+                                      v + self.offset * dv_sum);
+                let dv = bii.get_dv_6(x + self.offset * dx_sum,
+                                      y + self.offset * dy_sum,
+                                      z + self.offset * dz_sum,
+                                      w + self.offset * dw_sum,
+                                      u + self.offset * du_sum,
+                                      v + self.offset * dv_sum);
                 sum += amp * (1.0 - n.abs());
                 dx_sum += amp * dx * -n;
                 dy_sum += amp * dy * -n;
@@ -1278,6 +1261,10 @@ impl ImplicitModule for ImplicitFractal {
 
     fn spacing(&self) -> f64 {
         self.base.spacing
+    }
+
+    fn set_deriv_spacing(&mut self, s: f64) {
+        self.base.spacing = s;
     }
 }
 
