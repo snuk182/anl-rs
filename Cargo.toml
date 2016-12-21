@@ -7,7 +7,7 @@ description = "Accidental Noise Library port for Rust. "
 license = "MIT OR Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/snuk182/anl-rs.git"
-homepage = "https://github.com/snuk182/anl"
+homepage = "https://github.com/snuk182/anl-rs"
 
 [lib]
 name = "anl"
