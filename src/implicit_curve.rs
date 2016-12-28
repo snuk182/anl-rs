@@ -45,6 +45,10 @@ impl ImplicitCurve {
     pub fn set_source_module(&mut self, m: Rc<RefCell<ImplicitModule>>) {
         self.source = ScalarParameter::Source(m);
     }
+    
+    pub fn clear(&mut self) {
+    	self.curve.clear();
+    }
 }
 
 impl ImplicitModule for ImplicitCurve {
