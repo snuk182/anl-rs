@@ -1,4 +1,3 @@
-
 use super::implicit_base::ImplicitModuleBase;
 use super::{ImplicitModule, ScalarParameter};
 

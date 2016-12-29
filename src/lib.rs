@@ -5,9 +5,9 @@ mod utility;
 mod curve;
 mod vector_types;
 
-mod noise_gen;
-mod cellular_gen;
-mod random_gen;
+pub mod noise_gen;
+pub mod cellular_gen;
+pub mod random_gen;
 
 mod implicit_base;
 mod rgba_module_base;
@@ -43,6 +43,13 @@ mod implicit_pow;
 mod implicit_rgba_dot_product;
 mod implicit_rotate_domain;
 mod implicit_saw_tooth;
+mod implicit_sphere;
+mod implicit_tiers;
+mod implicit_triangle;
+
+mod rgba_blend;
+mod rgba_blend_ops;
+mod rgba_color_ops;
 
 pub use implicit_cache::*;
 pub use implicit_auto_correct::*;
@@ -73,3 +80,10 @@ pub use implicit_rgba_dot_product::*;
 pub use implicit_pow::*;
 pub use implicit_rotate_domain::*;
 pub use implicit_saw_tooth::*;
+pub use implicit_sphere::*;
+pub use implicit_tiers::*;
+pub use implicit_triangle::*;
+
+pub use rgba_blend::*;
+pub use rgba_blend_ops::*;
+pub use rgba_color_ops::*;

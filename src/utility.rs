@@ -68,3 +68,23 @@ pub fn gain(g: f64, t: f64) -> f64 {
         return 1.0 - bias(1.0 - g, 2.0 - 2.0 * t) / 2.0;
     }
 }
+
+pub fn min<'a, T>(a: &'a T, b: &'a T) -> &'a T
+    where T: ::std::cmp::PartialOrd
+{
+    match a.partial_cmp(b).unwrap() {
+        ::std::cmp::Ordering::Equal |
+        ::std::cmp::Ordering::Less => a,
+        ::std::cmp::Ordering::Greater => b,
+    }
+}
+
+pub fn max<'a, T>(a: &'a T, b: &'a T) -> &'a T
+    where T: ::std::cmp::PartialOrd
+{
+    match a.partial_cmp(b).unwrap() {
+        ::std::cmp::Ordering::Greater |
+        ::std::cmp::Ordering::Equal => a,
+        ::std::cmp::Ordering::Less => b,
+    }
+}

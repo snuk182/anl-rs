@@ -1,6 +1,7 @@
 use super::implicit_base::*;
 use super::ImplicitModule;
 use super::implicit_basis_function::*;
+use super::utility::{min, max};
 
 use std::rc::Rc;
 use std::cell::RefCell;
@@ -1265,25 +1266,5 @@ impl ImplicitModule for ImplicitFractal {
 
     fn set_deriv_spacing(&mut self, s: f64) {
         self.base.spacing = s;
-    }
-}
-
-fn min<'a, T>(a: &'a T, b: &'a T) -> &'a T
-    where T: ::std::cmp::PartialOrd
-{
-    match a.partial_cmp(b).unwrap() {
-        ::std::cmp::Ordering::Equal |
-        ::std::cmp::Ordering::Less => a,
-        ::std::cmp::Ordering::Greater => b,
-    }
-}
-
-fn max<'a, T>(a: &'a T, b: &'a T) -> &'a T
-    where T: ::std::cmp::PartialOrd
-{
-    match a.partial_cmp(b).unwrap() {
-        ::std::cmp::Ordering::Greater |
-        ::std::cmp::Ordering::Equal => a,
-        ::std::cmp::Ordering::Less => b,
     }
 }

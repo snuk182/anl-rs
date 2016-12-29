@@ -49,6 +49,64 @@ fn main() {
 		    cellular.set_seed(1234);
 	    }
     );
+    case!(normalize_coords, anl::ImplicitNormalizeCoords::new(),
+	    {
+		    normalize_coords.set_source_module(Rc::new(RefCell::new(anl::ImplicitGradient::new())));
+	    }
+    );
+    case!(rgba_dot_product, anl::ImplicitRgbaDotProduct::new(),
+	    {
+		    rgba_dot_product.set_source_1_constant(0.0, 50.0, 150.0, 255.0);
+		    rgba_dot_product.set_source_2_constant(0.0, 0.25, 0.75, 1.0);
+	    }
+    );
+    case!(saw_tooth, anl::ImplicitSawTooth::with_period(0.4),
+	    {
+		    saw_tooth.set_source_module(Rc::new(RefCell::new(anl::ImplicitGradient::new())));
+	    }
+    );
+    case!(sin, anl::ImplicitSin::new(),
+	    {
+		    sin.set_source_module(Rc::new(RefCell::new(anl::ImplicitGradient::new())));
+	    }
+    );
+    case!(cos, anl::ImplicitCos::new(),
+	    {
+		    cos.set_source_module(Rc::new(RefCell::new(anl::ImplicitGradient::new())));
+	    }
+    );
+    
+    case!(sphere, anl::ImplicitSphere::new_2d(0.3, 0.3),
+	    {
+		    sphere.set_radius_value(0.3);
+	    }
+    );
+    
+    case!(tiers, anl::ImplicitTiers::with_num_tiers(3, false),
+	    {
+		    tiers.set_source_module(Rc::new(RefCell::new(anl::ImplicitGradient::new())));
+	    }
+    );
+    
+    case!(triangle, anl::ImplicitTriangle::with_period_offset(0.2, 0.1),
+	    {
+		    triangle.set_source_module(Rc::new(RefCell::new(anl::ImplicitGradient::new())));
+	    }
+    );
+    
+    case!(rgba_blend, anl::ImplicitExtractRgbaChannel::with_channel(anl::ExtractChannel::Red),
+	    {
+	    	let mut m = anl::RgbaBlend::new();
+	    	m.set_control_module(Rc::new(RefCell::new(anl::ImplicitGradient::new())));
+		    rgba_blend.set_source_module(Rc::new(RefCell::new(m)));
+	    }
+    );
+    case!(rgba_blend_ops, anl::ImplicitExtractRgbaChannel::with_channel(anl::ExtractChannel::Green),
+	    {
+	    	let m = anl::RgbaBlendOps::with_modes(BlendOps::OneMinusSrc1Alpha, BlendOps::Src1Alpha);
+		    rgba_blend_ops.set_source_module(Rc::new(RefCell::new(m)));
+	    }
+    );    
 
     println!("\nPlease visit the 'target' folder for the results");
 }
