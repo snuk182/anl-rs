@@ -14,6 +14,7 @@ mod implicit_base;
 mod rgba_module_base;
 
 pub use implicit_base::{ImplicitModule, ScalarParameter};
+pub use rgba_module_base::*;
 
 mod implicit_cache;
 mod implicit_auto_correct;
