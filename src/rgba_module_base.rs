@@ -1,4 +1,4 @@
-use super::vector_types::Rgba;
+use super::vector_types::Vec4;
 
 use std::rc::Rc;
 use std::cell::RefCell;
@@ -54,4 +54,15 @@ impl RgbaParameter {
 			&mut RgbaParameter::Module(ref m) => m.borrow_mut().get_6d(x, y, z, w, u, v),
 		}
     }
+}
+
+
+pub type Rgba = Vec4<f32>;
+
+impl ::std::ops::Mul<f64> for Rgba {
+	type Output = Rgba;
+	
+	fn mul(self, rhs: f64) -> Self::Output {
+		Rgba::with_all(self.x() * rhs as f32, self.y() * rhs as f32, self.z() * rhs as f32, self.w() * rhs as f32)
+	}						 	
 }

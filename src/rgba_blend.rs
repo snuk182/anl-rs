@@ -1,5 +1,4 @@
-use super::rgba_module_base::{RgbaModule, RgbaParameter};
-use super::vector_types::Rgba;
+use super::rgba_module_base::{RgbaModule, RgbaParameter, Rgba};
 use super::{ImplicitModule, ScalarParameter};
 
 use std::rc::Rc;

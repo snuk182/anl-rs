@@ -223,12 +223,10 @@ macro_rules! vec_type {
 			fn div_assign(&mut self, rhs: T) {
 				$(self.0[$index] /= rhs);+
 			}						 	
-		}		
+		}									 	
 	}
 }
 
 vec_type!(Vec2, 2, [x = 0, y = 1]);
 vec_type!(Vec3, 3, [x = 0, y = 1, z = 2]);
 vec_type!(Vec4, 4, [x = 0, y = 1, z = 2, w = 3]);
-
-pub type Rgba = Vec4<f32>;

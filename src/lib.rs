@@ -1,9 +1,10 @@
 #[macro_use]
 extern crate lazy_static;
 
-mod utility;
-mod curve;
-mod vector_types;
+pub mod utility;
+pub mod curve;
+pub mod hsv;
+pub mod vector_types;
 
 pub mod noise_gen;
 pub mod cellular_gen;
@@ -50,6 +51,15 @@ mod implicit_triangle;
 mod rgba_blend;
 mod rgba_blend_ops;
 mod rgba_color_ops;
+mod rgba_compose_channels;
+mod rgba_constant;
+mod rgba_curve;
+mod rgba_hsv_to_rgba;
+mod rgba_implicit_greyscale;
+mod rgba_normalize;
+mod rgba_rgba_to_hsv;
+mod rgba_rotate_color;
+mod rgba_select;
 
 pub use implicit_cache::*;
 pub use implicit_auto_correct::*;
@@ -87,3 +97,12 @@ pub use implicit_triangle::*;
 pub use rgba_blend::*;
 pub use rgba_blend_ops::*;
 pub use rgba_color_ops::*;
+pub use rgba_compose_channels::*;
+pub use rgba_constant::*;
+pub use rgba_curve::*;
+pub use rgba_hsv_to_rgba::*;
+pub use rgba_implicit_greyscale::*;
+pub use rgba_normalize::*;
+pub use rgba_rgba_to_hsv::*;
+pub use rgba_rotate_color::*;
+pub use rgba_select::*;

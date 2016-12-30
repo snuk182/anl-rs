@@ -32,7 +32,7 @@ pub struct ImplicitRotateDomain {
 }
 
 impl ImplicitRotateDomain {
-    pub fn with_angles(ax: f64, ay: f64, az: f64, deg: f64) -> ImplicitRotateDomain {
+    pub fn with_axises_angles(ax: f64, ay: f64, az: f64, deg: f64) -> ImplicitRotateDomain {
         ImplicitRotateDomain {
             base: Default::default(),
             rotmatrix: [[0.0; 3]; 3],

@@ -1,5 +1,4 @@
-use super::rgba_module_base::{RgbaModule, RgbaParameter};
-use super::vector_types::Rgba;
+use super::rgba_module_base::{RgbaModule, RgbaParameter, Rgba};
 
 use std::rc::Rc;
 use std::cell::RefCell;
