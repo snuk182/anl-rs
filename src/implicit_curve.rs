@@ -49,44 +49,33 @@ impl ImplicitCurve {
     pub fn clear(&mut self) {
     	self.curve.clear();
     }
+    
+    fn get(&self, t: f64) -> f64 {
+    	match self.itype {
+            InterpType::None => self.curve.no_interp(t),
+            InterpType::Linear => self.curve.linear_interp(t),
+            InterpType::Cubic => self.curve.cubic_interp(t),
+            InterpType::Quintic => self.curve.quintic_interp(t),
+        }
+    }
 }
 
 impl ImplicitModule for ImplicitCurve {
     fn get_2d(&mut self, x: f64, y: f64) -> f64 {
         let t = self.source.get_2d(x, y);
-        match self.itype {
-            InterpType::None => self.curve.no_interp(t),
-            InterpType::Linear => self.curve.linear_interp(t),
-            InterpType::Cubic => self.curve.cubic_interp(t),
-            InterpType::Quintic => self.curve.quintic_interp(t),
-        }
+        self.get(t)
     }
     fn get_3d(&mut self, x: f64, y: f64, z: f64) -> f64 {
         let t = self.source.get_3d(x, y, z);
-        match self.itype {
-            InterpType::None => self.curve.no_interp(t),
-            InterpType::Linear => self.curve.linear_interp(t),
-            InterpType::Cubic => self.curve.cubic_interp(t),
-            InterpType::Quintic => self.curve.quintic_interp(t),
-        }
+        self.get(t)
     }
     fn get_4d(&mut self, x: f64, y: f64, z: f64, w: f64) -> f64 {
         let t = self.source.get_4d(x, y, z, w);
-        match self.itype {
-            InterpType::None => self.curve.no_interp(t),
-            InterpType::Linear => self.curve.linear_interp(t),
-            InterpType::Cubic => self.curve.cubic_interp(t),
-            InterpType::Quintic => self.curve.quintic_interp(t),
-        }
+        self.get(t)
     }
     fn get_6d(&mut self, x: f64, y: f64, z: f64, w: f64, u: f64, v: f64) -> f64 {
         let t = self.source.get_6d(x, y, z, w, u, v);
-        match self.itype {
-            InterpType::None => self.curve.no_interp(t),
-            InterpType::Linear => self.curve.linear_interp(t),
-            InterpType::Cubic => self.curve.cubic_interp(t),
-            InterpType::Quintic => self.curve.quintic_interp(t),
-        }
+        self.get(t)
     }
 
     fn spacing(&self) -> f64 {

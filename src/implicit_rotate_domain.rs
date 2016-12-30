@@ -78,92 +78,58 @@ impl ImplicitRotateDomain {
     pub fn set_source_value(&mut self, v: f64) {
         self.source = ScalarParameter::Value(v);
     }
+    
+    fn calculate_rot_matrix(&mut self, angledeg: f64, ax: f64, ay: f64, az: f64) {
+        let angle = angledeg * 360.0 * ::std::f64::consts::PI / 180.0;
+        let cosangle = angle.cos();
+        let sinangle = angle.sin();
+
+        self.rotmatrix[0][0] = 1.0 + (1.0 - cosangle) * (ax * ax - 1.0);
+        self.rotmatrix[1][0] = -az * sinangle + (1.0 - cosangle) * ax * ay;
+        self.rotmatrix[2][0] = ay * sinangle + (1.0 - cosangle) * ax * az;
+
+        self.rotmatrix[0][1] = az * sinangle + (1.0 - cosangle) * ax * ay;
+        self.rotmatrix[1][1] = 1.0 + (1.0 - cosangle) * (ay * ay - 1.0);
+        self.rotmatrix[2][1] = -ax * sinangle + (1.0 - cosangle) * ay * az;
+
+        self.rotmatrix[0][2] = -ay * sinangle + (1.0 - cosangle) * ax * az;
+        self.rotmatrix[1][2] = ax * sinangle + (1.0 - cosangle) * ay * az;
+        self.rotmatrix[2][2] = 1.0 + (1.0 - cosangle) * (az * az - 1.0);
+    }
 
     #[allow(dead_code)]
     fn calculate_rot_matrix_2d(&mut self, x: f64, y: f64) {
-        let angle = self.angledeg.get_2d(x, y) * 360.0 * ::std::f64::consts::PI / 180.0;
+        let angledeg = self.angledeg.get_2d(x, y);
         let ax = self.ax.get_2d(x, y);
         let ay = self.ay.get_2d(x, y);
         let az = self.az.get_2d(x, y);
 
-        let cosangle = angle.cos();
-        let sinangle = angle.sin();
-
-        self.rotmatrix[0][0] = 1.0 + (1.0 - cosangle) * (ax * ax - 1.0);
-        self.rotmatrix[1][0] = -az * sinangle + (1.0 - cosangle) * ax * ay;
-        self.rotmatrix[2][0] = ay * sinangle + (1.0 - cosangle) * ax * az;
-
-        self.rotmatrix[0][1] = az * sinangle + (1.0 - cosangle) * ax * ay;
-        self.rotmatrix[1][1] = 1.0 + (1.0 - cosangle) * (ay * ay - 1.0);
-        self.rotmatrix[2][1] = -ax * sinangle + (1.0 - cosangle) * ay * az;
-
-        self.rotmatrix[0][2] = -ay * sinangle + (1.0 - cosangle) * ax * az;
-        self.rotmatrix[1][2] = ax * sinangle + (1.0 - cosangle) * ay * az;
-        self.rotmatrix[2][2] = 1.0 + (1.0 - cosangle) * (az * az - 1.0);
+        self.calculate_rot_matrix(angledeg, ax, ay, az);
     }
 
     fn calculate_rot_matrix_3d(&mut self, x: f64, y: f64, z: f64) {
-        let angle = self.angledeg.get_3d(x, y, z) * 360.0 * ::std::f64::consts::PI / 180.0;
+        let angledeg = self.angledeg.get_3d(x, y, z);
         let ax = self.ax.get_3d(x, y, z);
         let ay = self.ay.get_3d(x, y, z);
         let az = self.az.get_3d(x, y, z);
 
-        let cosangle = angle.cos();
-        let sinangle = angle.sin();
-
-        self.rotmatrix[0][0] = 1.0 + (1.0 - cosangle) * (ax * ax - 1.0);
-        self.rotmatrix[1][0] = -az * sinangle + (1.0 - cosangle) * ax * ay;
-        self.rotmatrix[2][0] = ay * sinangle + (1.0 - cosangle) * ax * az;
-
-        self.rotmatrix[0][1] = az * sinangle + (1.0 - cosangle) * ax * ay;
-        self.rotmatrix[1][1] = 1.0 + (1.0 - cosangle) * (ay * ay - 1.0);
-        self.rotmatrix[2][1] = -ax * sinangle + (1.0 - cosangle) * ay * az;
-
-        self.rotmatrix[0][2] = -ay * sinangle + (1.0 - cosangle) * ax * az;
-        self.rotmatrix[1][2] = ax * sinangle + (1.0 - cosangle) * ay * az;
-        self.rotmatrix[2][2] = 1.0 + (1.0 - cosangle) * (az * az - 1.0);
+        self.calculate_rot_matrix(angledeg, ax, ay, az);
     }
     fn calculate_rot_matrix_4d(&mut self, x: f64, y: f64, z: f64, w: f64) {
-        let angle = self.angledeg.get_4d(x, y, z, w) * 360.0 * ::std::f64::consts::PI / 180.0;
+        let angledeg = self.angledeg.get_4d(x, y, z, w);
         let ax = self.ax.get_4d(x, y, z, w);
         let ay = self.ay.get_4d(x, y, z, w);
         let az = self.az.get_4d(x, y, z, w);
 
-        let cosangle = angle.cos();
-        let sinangle = angle.sin();
-
-        self.rotmatrix[0][0] = 1.0 + (1.0 - cosangle) * (ax * ax - 1.0);
-        self.rotmatrix[1][0] = -az * sinangle + (1.0 - cosangle) * ax * ay;
-        self.rotmatrix[2][0] = ay * sinangle + (1.0 - cosangle) * ax * az;
-
-        self.rotmatrix[0][1] = az * sinangle + (1.0 - cosangle) * ax * ay;
-        self.rotmatrix[1][1] = 1.0 + (1.0 - cosangle) * (ay * ay - 1.0);
-        self.rotmatrix[2][1] = -ax * sinangle + (1.0 - cosangle) * ay * az;
-
-        self.rotmatrix[0][2] = -ay * sinangle + (1.0 - cosangle) * ax * az;
-        self.rotmatrix[1][2] = ax * sinangle + (1.0 - cosangle) * ay * az;
-        self.rotmatrix[2][2] = 1.0 + (1.0 - cosangle) * (az * az - 1.0);
+        self.calculate_rot_matrix(angledeg, ax, ay, az);
     }
     fn calculate_rot_matrix_6d(&mut self, x: f64, y: f64, z: f64, w: f64, u: f64, v: f64) {
-        let angle = self.angledeg.get_6d(x, y, z, w, u, v) * 360.0 * ::std::f64::consts::PI / 180.0;
+        let angledeg = self.angledeg.get_6d(x, y, z, w, u, v);
         let ax = self.ax.get_6d(x, y, z, w, u, v);
         let ay = self.ay.get_6d(x, y, z, w, u, v);
         let az = self.az.get_6d(x, y, z, w, u, v);
 
-        let cosangle = angle.cos();
-        let sinangle = angle.sin();
-
-        self.rotmatrix[0][0] = 1.0 + (1.0 - cosangle) * (ax * ax - 1.0);
-        self.rotmatrix[1][0] = -az * sinangle + (1.0 - cosangle) * ax * ay;
-        self.rotmatrix[2][0] = ay * sinangle + (1.0 - cosangle) * ax * az;
-
-        self.rotmatrix[0][1] = az * sinangle + (1.0 - cosangle) * ax * ay;
-        self.rotmatrix[1][1] = 1.0 + (1.0 - cosangle) * (ay * ay - 1.0);
-        self.rotmatrix[2][1] = -ax * sinangle + (1.0 - cosangle) * ay * az;
-
-        self.rotmatrix[0][2] = -ay * sinangle + (1.0 - cosangle) * ax * az;
-        self.rotmatrix[1][2] = ax * sinangle + (1.0 - cosangle) * ay * az;
-        self.rotmatrix[2][2] = 1.0 + (1.0 - cosangle) * (az * az - 1.0);
+        self.calculate_rot_matrix(angledeg, ax, ay, az);
     }
 }
 

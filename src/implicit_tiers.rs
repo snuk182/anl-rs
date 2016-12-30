@@ -44,64 +44,40 @@ impl ImplicitTiers {
     pub fn set_smooth(&mut self, v: bool) {
         self.smooth = v;
     }
+    
+    #[inline(always)]
+	fn get(&self, val: f64) -> f64 {
+		let mut numsteps = self.numtiers;
+        if self.smooth {
+            numsteps -= 1;
+        }
+        
+        let mut tb = (val * numsteps as f64).floor();
+        let mut tt = tb + 1.0;
+        let t = val * numsteps as f64 - tb;
+        tb /= numsteps as f64;
+        tt /= numsteps as f64;
+        let u = if self.smooth { quintic_blend(t) } else { 0.0 };
+        tb + u * (tt - tb)
+	}
 }
 
 impl ImplicitModule for ImplicitTiers {
     fn get_2d(&mut self, x: f64, y: f64) -> f64 {
-        let mut numsteps = self.numtiers;
-        if self.smooth {
-            numsteps -= 1;
-        }
         let val = self.source.get_2d(x, y);
-        let mut tb = (val * numsteps as f64).floor();
-        let mut tt = tb + 1.0;
-        let t = val * numsteps as f64 - tb;
-        tb /= numsteps as f64;
-        tt /= numsteps as f64;
-        let u = if self.smooth { quintic_blend(t) } else { 0.0 };
-        tb + u * (tt - tb)
+        self.get(val)
     }
     fn get_3d(&mut self, x: f64, y: f64, z: f64) -> f64 {
-        let mut numsteps = self.numtiers;
-        if self.smooth {
-            numsteps -= 1;
-        }
         let val = self.source.get_3d(x, y, z);
-        let mut tb = (val * numsteps as f64).floor();
-        let mut tt = tb + 1.0;
-        let t = val * numsteps as f64 - tb;
-        tb /= numsteps as f64;
-        tt /= numsteps as f64;
-        let u = if self.smooth { quintic_blend(t) } else { 0.0 };
-        tb + u * (tt - tb)
+        self.get(val)
     }
     fn get_4d(&mut self, x: f64, y: f64, z: f64, w: f64) -> f64 {
-        let mut numsteps = self.numtiers;
-        if self.smooth {
-            numsteps -= 1;
-        }
         let val = self.source.get_4d(x, y, z, w);
-        let mut tb = (val * numsteps as f64).floor();
-        let mut tt = tb + 1.0;
-        let t = val * numsteps as f64 - tb;
-        tb /= numsteps as f64;
-        tt /= numsteps as f64;
-        let u = if self.smooth { quintic_blend(t) } else { 0.0 };
-        tb + u * (tt - tb)
+        self.get(val)
     }
     fn get_6d(&mut self, x: f64, y: f64, z: f64, w: f64, u: f64, v: f64) -> f64 {
-        let mut numsteps = self.numtiers;
-        if self.smooth {
-            numsteps -= 1;
-        }
         let val = self.source.get_6d(x, y, z, w, u, v);
-        let mut tb = (val * numsteps as f64).floor();
-        let mut tt = tb + 1.0;
-        let t = val * numsteps as f64 - tb;
-        tb /= numsteps as f64;
-        tt /= numsteps as f64;
-        let s = if self.smooth { quintic_blend(t) } else { 0.0 };
-        tb + s * (tt - tb)
+        self.get(val)
     }
 
     fn spacing(&self) -> f64 {
