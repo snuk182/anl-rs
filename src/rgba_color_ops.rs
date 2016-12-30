@@ -49,72 +49,44 @@ impl RgbaColorOps {
     pub fn set_operation(&mut self, op: ColorOperation) {
         self.op = op;
     }
+    
+    #[inline(always)]
+    fn get(&self, s1: &Rgba, s2: &Rgba) -> Rgba {
+    	match self.op {
+            ColorOperation::ColorMultiply => multiply(s1, s2),
+            ColorOperation::ColorAdd => add(s1, s2),
+            ColorOperation::Screen => screen(s1, s2),
+            ColorOperation::Overlay => overlay(s1, s2),
+            ColorOperation::SoftLight => soft_light(s1, s2),
+            ColorOperation::HardLight => hard_light(s1, s2),
+            ColorOperation::Dodge => dodge(s1, s2),
+            ColorOperation::Burn => burn(s1, s2),
+            ColorOperation::LinearDodge => linear_dodge(s1, s2),
+            ColorOperation::LinearBurn => linear_burn(s1, s2),
+        }
+    }
 }
 
 impl RgbaModule for RgbaColorOps {
     fn get_2d(&mut self, x: f64, y: f64) -> Rgba {
         let s1 = self.source_1.get_2d(x, y);
         let s2 = self.source_2.get_2d(x, y);
-        match self.op {
-            ColorOperation::ColorMultiply => multiply(&s1, &s2),
-            ColorOperation::ColorAdd => add(&s1, &s2),
-            ColorOperation::Screen => screen(&s1, &s2),
-            ColorOperation::Overlay => overlay(&s1, &s2),
-            ColorOperation::SoftLight => soft_light(&s1, &s2),
-            ColorOperation::HardLight => hard_light(&s1, &s2),
-            ColorOperation::Dodge => dodge(&s1, &s2),
-            ColorOperation::Burn => burn(&s1, &s2),
-            ColorOperation::LinearDodge => linear_dodge(&s1, &s2),
-            ColorOperation::LinearBurn => linear_burn(&s1, &s2),
-        }
+        self.get(&s1, &s2)
     }
     fn get_3d(&mut self, x: f64, y: f64, z: f64) -> Rgba {
         let s1 = self.source_1.get_3d(x, y, z);
         let s2 = self.source_2.get_3d(x, y, z);
-        match self.op {
-            ColorOperation::ColorMultiply => multiply(&s1, &s2),
-            ColorOperation::ColorAdd => add(&s1, &s2),
-            ColorOperation::Screen => screen(&s1, &s2),
-            ColorOperation::Overlay => overlay(&s1, &s2),
-            ColorOperation::SoftLight => soft_light(&s1, &s2),
-            ColorOperation::HardLight => hard_light(&s1, &s2),
-            ColorOperation::Dodge => dodge(&s1, &s2),
-            ColorOperation::Burn => burn(&s1, &s2),
-            ColorOperation::LinearDodge => linear_dodge(&s1, &s2),
-            ColorOperation::LinearBurn => linear_burn(&s1, &s2),
-        }
+        self.get(&s1, &s2)
     }
     fn get_4d(&mut self, x: f64, y: f64, z: f64, w: f64) -> Rgba {
         let s1 = self.source_1.get_4d(x, y, z, w);
         let s2 = self.source_2.get_4d(x, y, z, w);
-        match self.op {
-            ColorOperation::ColorMultiply => multiply(&s1, &s2),
-            ColorOperation::ColorAdd => add(&s1, &s2),
-            ColorOperation::Screen => screen(&s1, &s2),
-            ColorOperation::Overlay => overlay(&s1, &s2),
-            ColorOperation::SoftLight => soft_light(&s1, &s2),
-            ColorOperation::HardLight => hard_light(&s1, &s2),
-            ColorOperation::Dodge => dodge(&s1, &s2),
-            ColorOperation::Burn => burn(&s1, &s2),
-            ColorOperation::LinearDodge => linear_dodge(&s1, &s2),
-            ColorOperation::LinearBurn => linear_burn(&s1, &s2),
-        }
+        self.get(&s1, &s2)
     }
     fn get_6d(&mut self, x: f64, y: f64, z: f64, w: f64, u: f64, v: f64) -> Rgba {
         let s1 = self.source_1.get_6d(x, y, z, w, u, v);
         let s2 = self.source_2.get_6d(x, y, z, w, u, v);
-        match self.op {
-            ColorOperation::ColorMultiply => multiply(&s1, &s2),
-            ColorOperation::ColorAdd => add(&s1, &s2),
-            ColorOperation::Screen => screen(&s1, &s2),
-            ColorOperation::Overlay => overlay(&s1, &s2),
-            ColorOperation::SoftLight => soft_light(&s1, &s2),
-            ColorOperation::HardLight => hard_light(&s1, &s2),
-            ColorOperation::Dodge => dodge(&s1, &s2),
-            ColorOperation::Burn => burn(&s1, &s2),
-            ColorOperation::LinearDodge => linear_dodge(&s1, &s2),
-            ColorOperation::LinearBurn => linear_burn(&s1, &s2),
-        }
+        self.get(&s1, &s2)
     }
 }
 

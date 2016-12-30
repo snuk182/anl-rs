@@ -53,6 +53,15 @@ impl RgbaComposeChannels {
     pub fn set_alpha_module(&mut self, m: Rc<RefCell<ImplicitModule>>) {
         self.c4 = ScalarParameter::Source(m)
     }
+    
+    #[inline(always)]
+    fn get(&self, r: f64, g: f64, b: f64, a: f64) -> Rgba {
+    	let rgba = Rgba::with_all(r as f32, g as f32, b as f32, a as f32);
+        match self.mode {
+            CompositeChannelsMode::Rgb => rgba,
+            CompositeChannelsMode::Hsv => hsv_to_rgba(&rgba),
+        }
+    }
 }
 
 impl RgbaModule for RgbaComposeChannels {
@@ -62,11 +71,7 @@ impl RgbaModule for RgbaComposeChannels {
         let b = self.c3.get_2d(x, y);
         let a = self.c4.get_2d(x, y);
 
-        let rgba = Rgba::with_all(r as f32, g as f32, b as f32, a as f32);
-        match self.mode {
-            CompositeChannelsMode::Rgb => rgba,
-            CompositeChannelsMode::Hsv => hsv_to_rgba(&rgba),
-        }
+        self.get(r, g, b, a)
     }
     fn get_3d(&mut self, x: f64, y: f64, z: f64) -> Rgba {
         let r = self.c1.get_3d(x, y, z);
@@ -74,11 +79,7 @@ impl RgbaModule for RgbaComposeChannels {
         let b = self.c3.get_3d(x, y, z);
         let a = self.c4.get_3d(x, y, z);
 
-        let rgba = Rgba::with_all(r as f32, g as f32, b as f32, a as f32);
-        match self.mode {
-            CompositeChannelsMode::Rgb => rgba,
-            CompositeChannelsMode::Hsv => hsv_to_rgba(&rgba),
-        }
+        self.get(r, g, b, a)
     }
     fn get_4d(&mut self, x: f64, y: f64, z: f64, w: f64) -> Rgba {
         let r = self.c1.get_4d(x, y, z, w);
@@ -86,11 +87,7 @@ impl RgbaModule for RgbaComposeChannels {
         let b = self.c3.get_4d(x, y, z, w);
         let a = self.c4.get_4d(x, y, z, w);
 
-        let rgba = Rgba::with_all(r as f32, g as f32, b as f32, a as f32);
-        match self.mode {
-            CompositeChannelsMode::Rgb => rgba,
-            CompositeChannelsMode::Hsv => hsv_to_rgba(&rgba),
-        }
+        self.get(r, g, b, a)
     }
     fn get_6d(&mut self, x: f64, y: f64, z: f64, w: f64, u: f64, v: f64) -> Rgba {
         let r = self.c1.get_6d(x, y, z, w, u, v);
@@ -98,10 +95,6 @@ impl RgbaModule for RgbaComposeChannels {
         let b = self.c3.get_6d(x, y, z, w, u, v);
         let a = self.c4.get_6d(x, y, z, w, u, v);
 
-        let rgba = Rgba::with_all(r as f32, g as f32, b as f32, a as f32);
-        match self.mode {
-            CompositeChannelsMode::Rgb => rgba,
-            CompositeChannelsMode::Hsv => hsv_to_rgba(&rgba),
-        }
+        self.get(r, g, b, a)
     }
 }

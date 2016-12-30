@@ -46,40 +46,32 @@ impl RgbaModule for RgbaBlend {
         let low = self.low.get_2d(x, y);
         let high = self.high.get_2d(x, y);
         let control = self.control.get_2d(x, y) as f32;
-
-        Rgba::with_all((low[0] + control * (high[0] - low[0])),
-                       (low[1] + control * (high[1] - low[1])),
-                       (low[2] + control * (high[2] - low[2])),
-                       (low[3] + control * (high[3] - low[3])))
+        get(&low, &high, control)
     }
     fn get_3d(&mut self, x: f64, y: f64, z: f64) -> Rgba {
         let low = self.low.get_3d(x, y, z);
         let high = self.high.get_3d(x, y, z);
         let control = self.control.get_3d(x, y, z) as f32;
-
-        Rgba::with_all((low[0] + control * (high[0] - low[0])),
-                       (low[1] + control * (high[1] - low[1])),
-                       (low[2] + control * (high[2] - low[2])),
-                       (low[3] + control * (high[3] - low[3])))
+        get(&low, &high, control)
     }
     fn get_4d(&mut self, x: f64, y: f64, z: f64, w: f64) -> Rgba {
         let low = self.low.get_4d(x, y, z, w);
         let high = self.high.get_4d(x, y, z, w);
         let control = self.control.get_4d(x, y, z, w) as f32;
-
-        Rgba::with_all((low[0] + control * (high[0] - low[0])),
-                       (low[1] + control * (high[1] - low[1])),
-                       (low[2] + control * (high[2] - low[2])),
-                       (low[3] + control * (high[3] - low[3])))
+        get(&low, &high, control)
     }
     fn get_6d(&mut self, x: f64, y: f64, z: f64, w: f64, u: f64, v: f64) -> Rgba {
         let low = self.low.get_6d(x, y, z, w, u, v);
         let high = self.high.get_6d(x, y, z, w, u, v);
         let control = self.control.get_6d(x, y, z, w, u, v) as f32;
-
-        Rgba::with_all((low[0] + control * (high[0] - low[0])),
-                       (low[1] + control * (high[1] - low[1])),
-                       (low[2] + control * (high[2] - low[2])),
-                       (low[3] + control * (high[3] - low[3])))
+        get(&low, &high, control)
     }
+}
+
+#[inline(always)]
+fn get(low: &Rgba, high: &Rgba, control: f32) -> Rgba {
+    Rgba::with_all((low[0] + control * (high[0] - low[0])),
+                   (low[1] + control * (high[1] - low[1])),
+                   (low[2] + control * (high[2] - low[2])),
+                   (low[3] + control * (high[3] - low[3])))
 }

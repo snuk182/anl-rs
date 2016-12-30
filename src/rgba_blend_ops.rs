@@ -59,6 +59,7 @@ impl RgbaBlendOps {
         self.blend_2 = b;
     }
 
+    #[inline(always)]
     fn blend_rgbas(&self, s1: &Rgba, s2: &Rgba) -> Rgba {
         let srcfactor = match self.blend_1 {
             BlendOps::Src1Alpha => s1[3],
