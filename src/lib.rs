@@ -4,6 +4,7 @@ extern crate lazy_static;
 pub mod utility;
 pub mod curve;
 pub mod hsv;
+pub mod mapping;
 pub mod vector_types;
 
 pub mod noise_gen;

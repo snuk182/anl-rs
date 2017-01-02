@@ -99,12 +99,12 @@ impl ImplicitFractal {
             numoctaves: 8,
             frequency: 1.0,
             lacunarity: 2.0,
-            ftype: ftype,
             ..Default::default()
         };
 
         v.set_all_source_types(basistype, interptype);
         v.reset_all_sources();
+        v.set_type(ftype);
 
         return v;
     }
@@ -195,7 +195,7 @@ impl ImplicitFractal {
 
     fn fbm_calc_weights(&mut self) {
         for i in 0..MAX_SOURCES {
-            self.exparray[i] = self.lacunarity.powf(!i as f64 * self.H);
+            self.exparray[i] = self.lacunarity.powf(-(i as f64) * self.H);
         }
 
         // Calculate scale/bias pairs by guessing at minimum and maximum values and remapping to [-1,1]
@@ -216,7 +216,7 @@ impl ImplicitFractal {
 
     fn ridged_multi_calc_weights(&mut self) {
         for i in 0..MAX_SOURCES {
-            self.exparray[i] = self.lacunarity.powf(!i as f64 * self.H);
+            self.exparray[i] = self.lacunarity.powf(-(i as f64) * self.H);
         }
 
         // Calculate scale/bias pairs by guessing at minimum and maximum values and remapping to [-1,1]
@@ -237,7 +237,7 @@ impl ImplicitFractal {
 
     pub fn decarpentier_swiss_calc_weights(&mut self) {
         for i in 0..MAX_SOURCES {
-            self.exparray[i] = self.lacunarity.powf(!i as f64 * self.H);
+            self.exparray[i] = self.lacunarity.powf(-(i as f64) * self.H);
         }
 
         // Calculate scale/bias pairs by guessing at minimum and maximum values and remapping to [-1,1]
@@ -258,7 +258,7 @@ impl ImplicitFractal {
 
     pub fn billow_calc_weights(&mut self) {
         for i in 0..MAX_SOURCES {
-            self.exparray[i] = self.lacunarity.powf(!i as f64 * self.H);
+            self.exparray[i] = self.lacunarity.powf(-(i as f64) * self.H);
         }
 
         // Calculate scale/bias pairs by guessing at minimum and maximum values and remapping to [-1,1]
@@ -279,7 +279,7 @@ impl ImplicitFractal {
 
     pub fn multi_calc_weights(&mut self) {
         for i in 0..MAX_SOURCES {
-            self.exparray[i] = self.lacunarity.powf(!i as f64 * self.H);
+            self.exparray[i] = self.lacunarity.powf(-(i as f64) * self.H);
         }
 
         // Calculate scale/bias pairs by guessing at minimum and maximum values and remapping to [-1,1]
@@ -301,7 +301,7 @@ impl ImplicitFractal {
 
     pub fn hybrid_multi_calc_weights(&mut self) {
         for i in 0..MAX_SOURCES {
-            self.exparray[i] = self.lacunarity.powf(!i as f64 * self.H);
+            self.exparray[i] = self.lacunarity.powf(-(i as f64) * self.H);
         }
 
         // Calculate scale/bias pairs by guessing at minimum and maximum values and remapping to [-1,1]

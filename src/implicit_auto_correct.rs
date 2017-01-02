@@ -23,7 +23,7 @@ pub struct ImplicitAutoCorrect {
 
 impl ImplicitAutoCorrect {
     pub fn with_source(source: Option<Rc<RefCell<ImplicitModule>>>) -> ImplicitAutoCorrect {
-        ImplicitAutoCorrect {
+        let mut i = ImplicitAutoCorrect {
             base: Default::default(),
             source: source,
             low: 0.0,
@@ -36,11 +36,13 @@ impl ImplicitAutoCorrect {
             offset4: 0.0,
             scale6: 0.0,
             offset6: 0.0,
-        }
+        };
+        i.calculate();
+        i
     }
 
     pub fn with_range(low: f64, high: f64) -> ImplicitAutoCorrect {
-        ImplicitAutoCorrect {
+        let mut i = ImplicitAutoCorrect {
             base: Default::default(),
             source: None,
             low: low,
@@ -53,7 +55,9 @@ impl ImplicitAutoCorrect {
             offset4: 0.0,
             scale6: 0.0,
             offset6: 0.0,
-        }
+        };
+        i.calculate();
+        i
     }
 
     pub fn new() -> ImplicitAutoCorrect {
