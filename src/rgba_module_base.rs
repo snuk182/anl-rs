@@ -59,10 +59,28 @@ impl RgbaParameter {
 
 pub type Rgba = Vec4<f32>;
 
+impl Rgba {
+	pub fn r(&self) -> f32 {
+		self.x()
+	}
+	
+	pub fn g(&self) -> f32 {
+		self.y()
+	}
+	
+	pub fn b(&self) -> f32 {
+		self.z()
+	}
+	
+	pub fn a(&self) -> f32 {
+		self.w()
+	}
+}
+
 impl ::std::ops::Mul<f64> for Rgba {
 	type Output = Rgba;
 	
 	fn mul(self, rhs: f64) -> Self::Output {
-		Rgba::with_all(self.x() * rhs as f32, self.y() * rhs as f32, self.z() * rhs as f32, self.w() * rhs as f32)
+		Rgba::with_all(self.r() * rhs as f32, self.g() * rhs as f32, self.b() * rhs as f32, self.a() * rhs as f32)
 	}						 	
 }
