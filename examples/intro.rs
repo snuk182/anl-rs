@@ -13,6 +13,8 @@ const SIZE: u32 = 800;
 const NAME: &'static str = "intro";
 
 fn main() {
+	println!("Initializing '{}'", NAME);
+
 	let mut rnd = anl::random_gen::CMWC4096::new();
 	anl::random_gen::set_seed_time(&mut rnd);
 	
@@ -68,35 +70,18 @@ fn main() {
 
     for x in 0..SIZE {
         for y in 0..SIZE {
-        	let rgba = rot.borrow_mut().get_2d(x as f64 / SIZE as f64, y as f64 / SIZE as f64);
+        	let rgba = compose1.borrow_mut().get_2d(x as f64 / SIZE as f64, y as f64 / SIZE as f64);
             imgbuf.put_pixel(x, y, image::Rgba([
-            		((rgba.x() / 2.0 + 0.5) * ::std::u8::MAX as f32) as u8, 
-	            	((rgba.y() / 2.0 + 0.5) * ::std::u8::MAX as f32) as u8, 
-		            ((rgba.z() / 2.0 + 0.5) * ::std::u8::MAX as f32) as u8, 
-		        	((rgba.w() / 2.0 + 0.5) * ::std::u8::MAX as f32) as u8]));
+            		(rgba.r() * ::std::u8::MAX as f32) as u8, 
+	            	(rgba.g() * ::std::u8::MAX as f32) as u8, 
+		            (rgba.b() * ::std::u8::MAX as f32) as u8, 
+		        	(rgba.a() * ::std::u8::MAX as f32) as u8]));
         }
     }
 
     let ref mut fout = File::create(format!("./target/{}.png", NAME)).unwrap();
 
     let _ = image::ImageRgba8(imgbuf).save(fout, image::PNG);
-	
-    /*    
-    anl::CRGBARotateColor rot;
-    rot.setAngle(&ac4);
-    rot.setAxisX(&ac5);
-    rot.setAxisY(&ac6);
-    rot.setAxisZ(&ac7);
-    rot.setNormalizeAxis(true);
-    rot.setSource(&compose1);
-	
-   TArray2D img(256,256);
-
-   anl::SMappingRanges ranges; 
-   mapRGBA2D(anl::SEAMLESS_NONE,img,rot,ranges,0);
-   saveRGBAArray((char*)"a.tga",&img);
-   mapRGBA2D(anl::SEAMLESS_NONE,img,compose1,ranges,0);
-   saveRGBAArray((char*)"b.tga",&img);*/
     
     println!("\nPlease visit the 'target' folder for the results");
 }
