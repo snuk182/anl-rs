@@ -1,9 +1,12 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html).
+
 use super::implicit_base::{ImplicitModuleBase, ScalarParameter};
 use super::ImplicitModule;
 
 use std::rc::Rc;
 use std::cell::RefCell;
 
+/// ScaleDomain applies a domain scaling to the coordinates input to the function.
 pub struct ImplicitScaleDomain {
     base: ImplicitModuleBase,
     source: ScalarParameter,

@@ -1,3 +1,5 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html).
+
 use super::implicit_base::ImplicitModuleBase;
 use super::ImplicitModule;
 use super::rgba_module_base::{RgbaParameter, RgbaModule};
@@ -13,6 +15,7 @@ pub enum ExtractChannel {
     Alpha = 3,
 }
 
+/// ExtractRGBAChannel accepts an ['RgbaParameter'](enum.RgbaParameter.html) and extracts one of the channels. The accepted values for channel are listed in the [`ExtractChannel`](enum.ExtractChannel.html).
 pub struct ImplicitExtractRgbaChannel {
     base: ImplicitModuleBase,
     channel: ExtractChannel,

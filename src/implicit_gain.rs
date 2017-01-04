@@ -1,3 +1,5 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html).
+
 use super::implicit_base::ImplicitModuleBase;
 use super::{ImplicitModule, ScalarParameter};
 use super::utility::gain;
@@ -5,6 +7,15 @@ use super::utility::gain;
 use std::rc::Rc;
 use std::cell::RefCell; 
 
+/// Gain is similar in effect to [`Bias`](struct.ImplicitBias.html), and in fact uses Bias in its working. It applies the following function to the source input:
+/// ```
+/// if(t<0.5) {
+///		return bias(1.0-g, 2.0*t)/2.0;
+///	} else {
+///		return 1.0 - bias(1.0-g, 2.0 - 2.0*t)/2.0;
+///	}
+/// ```
+/// This function has the effect of pushing the values of the input either toward the ends and away from the middle (if bias is >0.5) or pushing values toward the middle and away from the ends (if bias is < 0.5).
 pub struct ImplicitGain {
 	base: ImplicitModuleBase,
 	source: ScalarParameter,

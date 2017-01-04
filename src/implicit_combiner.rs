@@ -1,3 +1,5 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html).
+
 use super::implicit_base::{ImplicitModuleBase, MAX_SOURCES};
 use super::ImplicitModule;
 
@@ -12,6 +14,7 @@ pub enum CombinerType {
     Avg,
 }
 
+/// Combiner is useful for mathematically combining several functions together using arithmetic operators. The function will accept up to 20 sources, and generates a combination of the sources depending on the type parameter, which can be one of [`Add`](enum.CombinerType.html#Add), [`Mul`](enum.CombinerType.html#Mul), [`Max`](enum.CombinerType.html#Max), [`Min`](enum.CombinerType.html#Min) or [`Avg`](enum.CombinerType.html#Avg).
 pub struct ImplicitCombiner {
     base: ImplicitModuleBase,
     sources: [Option<Rc<RefCell<ImplicitModule>>>; MAX_SOURCES],

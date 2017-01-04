@@ -1,3 +1,9 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html).
+///
+/// RGBA modules operate int he RGBA colorspace, and are useful for creating color map, ie for textures. They typically operate by extracting data from relevant Implicit sources, and converting that data to color information somehow. All RGBA functions are derived from RgbaModule trait.
+///
+/// RGBA modules return a value of type Rgba. The typical value range for the components of an SRGBA are (0,1). Typically, these values will map to (0,255) in unsigned char RGB colorspace, and anything beyond them is clamped. However, how an R is actually converted to a color is really up to the application.
+
 use super::vector_types::Vec4;
 
 use std::rc::Rc;

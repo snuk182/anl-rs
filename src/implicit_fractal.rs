@@ -1,3 +1,5 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html).
+
 use super::implicit_base::*;
 use super::ImplicitModule;
 use super::implicit_basis_function::*;
@@ -15,6 +17,8 @@ pub enum FractalType {
     DecarpentierSwiss,
 }
 
+/// Fractals are a special type of combiner that combine up to 20 noise sources using fractal methods pioneered by Perlin, Musgrave, and friends. They come in various types (specifiable through [`set_type()`](struct.ImplicitFractal.html#set_type) or in the constructor). Each fractal has up to 20 built-in [`BasisFunction`](struct.ImplicitBasisFunction.html)s whose basistype and interptype can be set via the provided methods. Additionally, you can obtain a pointer to any source of the fractal via [`get_basis()`](struct.ImplicitFractal.html#get_basis). Any source module in the fractal may also be overridden by an external noise function via overrideSource(). The complexity of this system serves a purpose: "generic" fractals of a given type, with basis functions of all the same type, can easily be instance just by construction, yet more complex behavior can be produced by overriding layers with external sources, to build up very complex fractals, if so desired.
+/// Fractals are highly parameterized. The two most useful parameters are `numoctaves` which determines how many layers contribute to the fractal, and `frequency` which specifies the density of the function. Frequency mimics combining a [`ScaleDomain`](struct.ImplicitScaleDomain.html) function to the source, multiplying the input coordinates by frequency before calculating the function. Other parameters that control the fractal are `offset`, `lacunarity`, `gain` and `H`. These parameters can have subtle, drastic, or no effect on the fractal, depending on the type, and they are typically best left alone. 
 #[allow(non_snake_case)]
 pub struct ImplicitFractal {
     base: ImplicitModuleBase,

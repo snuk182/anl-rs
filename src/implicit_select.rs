@@ -1,3 +1,5 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html).
+
 use super::implicit_base::{ImplicitModuleBase, ScalarParameter};
 use super::utility::{lerp, quintic_blend};
 use super::ImplicitModule;
@@ -5,6 +7,7 @@ use super::ImplicitModule;
 use std::rc::Rc;
 use std::cell::RefCell;
 
+/// Select is used to choose between one function or another based on the output value of a third `control` function. Two parameters control how the select is performed, `threshold` and `falloff`. `Threshold` determines where the dividing line is; values on one side of threshold are taken from one source module, while values on the other side are taken from the second source. `Falloff` defines the width of a soft "blend" zone that straddles threshold, helping to smooth the transition between the two functions.
 pub struct ImplicitSelect {
     base: ImplicitModuleBase,
     low: ScalarParameter,

@@ -1,3 +1,5 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html).
+
 use super::implicit_base::ImplicitModuleBase;
 use super::{ScalarParameter, ImplicitModule};
 
@@ -27,10 +29,7 @@ impl Default for Cache {
     }
 }
 
-// pub fn new(source: ScalarParameter) -> impl ImplicitModule {
-// ImplicitCache::new(source)
-// }
-
+// 
 pub struct ImplicitCache {
     base: ImplicitModuleBase,
     source: ScalarParameter,

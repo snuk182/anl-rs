@@ -1,3 +1,5 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html).
+
 use super::implicit_base::ImplicitModuleBase;
 use super::{ImplicitModule, ScalarParameter};
 use super::utility::clamp;
@@ -5,6 +7,7 @@ use super::utility::clamp;
 use std::rc::Rc;
 use std::cell::RefCell;
 
+/// Generates a hyper sphere as a distance field. Values between the center and the radius are interpolated between 0 and 1, while values beyond radius are 0. The individual axis components of the center point, as well as the radius, are specifiable as either constants or as noise functions, making this an extremely flexible sphere indeed. Following are images taken as cross-sections of the sphere in the 2D plane, the one on the left with all constants for the components, the one in the center with constants for center and a fractal function for radius, and the one on the right with a fractal for the x component, and a constant radius.
 pub struct ImplicitSphere {
     base: ImplicitModuleBase,
     cx: ScalarParameter,

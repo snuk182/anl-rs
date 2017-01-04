@@ -1,3 +1,5 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html).
+
 use super::implicit_base::{ImplicitModuleBase, ScalarParameter};
 use super::ImplicitModule;
 
@@ -21,6 +23,7 @@ use std::cell::RefCell;
 // Q u = u
 //
 
+/// RotateDomain applies a domain rotation to the input function. That is, it actually modifies the coordinates that the input function will be called by. If the RotateDomain is called by the input coordinate (x,y), it will call its source with the input coordinate (nx,ny) where (nx,ny) is a transformation of the original input; specifically, a rotation around an axis. This function has slightly different behavior depending on if the 2D version is called or if some higher version is called. 2D version rotates the input around the Z axis by the given angular amount, and the axis sources set by [`set_axis()`](struct.ImplicitRotateDomain.html) are ignored. 3D and above, however, rotate the domain around the axis specified.
 pub struct ImplicitRotateDomain {
     base: ImplicitModuleBase,
     rotmatrix: [[f64; 3]; 3],

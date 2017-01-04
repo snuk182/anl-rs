@@ -1,8 +1,12 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html). 
+
 use std::rc::Rc;
 use std::cell::RefCell;
 
 pub const MAX_SOURCES: usize = 20;
 
+/// Implicit modules output double-precision float values. Implicit functions are derived from ImplicitModule trait.
+/// Noise values are obtained by calling one of the get() methods provided, with the appropriate number of coordinates. Note that the performance of the system as a hold is affected by the dimensionality of the function called, so a 6D function will take significantly longer than a 2D function. Typical applications will probably stick with 2D or 3D versions; the higher orders are provided for the purpose of [seamless mapping](http://accidentalnoise.sourceforge.net/seamlessnoise.html). 
 pub trait ImplicitModule {
     fn set_seed(&mut self, _: u32) {}
 
@@ -130,6 +134,7 @@ impl Default for ImplicitModuleBase {
     }
 }
 
+/// Many functions have "parameters" that affect their functionality, aside from any "source" function they might have. An example is the ImplicitSelect function. This function has a control source, a low source, a high source, a threshold parameter, and a falloff parameter. The threshold parameter is used to select between the output of lowSource and highSource, depending on if the value of controlSource is above or below threshold. All five of these inputs are instances of what ANL calls a "scalar parameter". A scalar parameter can be set to either a constant (double-precision) value, or to another function. Most will default to some sane double-precision value (ie, 0), but if desired they can be overridden with any constant or any implicit functional output. In this way, complex behaviors can be obtained through a relatively simple interface.
 pub enum ScalarParameter {
     Value(f64),
     Source(Rc<RefCell<ImplicitModule>>),

@@ -1,7 +1,13 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html).
+
 use super::implicit_base::ImplicitModuleBase;
 use super::{ScalarParameter, ImplicitModule};
 use super::utility::lerp;
 
+use std::rc::Rc;
+use std::cell::RefCell;
+
+/// Blend has the effect of blending the value from `lowSource` with the value of `highSource` by linearly interpolating from one to the other using the value of `controlSource`. For best results, `controlSource` should output in the range of (0,1). All three inputs are scalar parameters that may accept either a constant value or a functional input as a source.
 pub struct ImplicitBlend {
     base: ImplicitModuleBase,
     low: ScalarParameter,
@@ -19,16 +25,24 @@ impl ImplicitBlend {
         }
     }
 
-    pub fn set_low_source(&mut self, source: ScalarParameter) {
-        self.low = source;
+	pub fn set_low_module(&mut self, m: Rc<RefCell<ImplicitModule>>) {
+        self.low = ScalarParameter::Source(m);
+    }
+    pub fn set_low_value(&mut self, v: f64) {
+        self.low = ScalarParameter::Value(v);
     }
 
-    pub fn set_high_source(&mut self, source: ScalarParameter) {
-        self.high = source;
+    pub fn set_high_module(&mut self, m: Rc<RefCell<ImplicitModule>>) {
+        self.high = ScalarParameter::Source(m);
     }
-
-    pub fn set_control_source(&mut self, source: ScalarParameter) {
-        self.control = source;
+    pub fn set_high_value(&mut self, v: f64) {
+        self.high = ScalarParameter::Value(v);
+    }
+    pub fn set_control_module(&mut self, m: Rc<RefCell<ImplicitModule>>) {
+        self.control = ScalarParameter::Source(m);
+    }
+    pub fn set_control_value(&mut self, v: f64) {
+        self.control = ScalarParameter::Value(v);
     }
 }
 

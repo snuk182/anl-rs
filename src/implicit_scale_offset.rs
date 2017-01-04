@@ -1,9 +1,12 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html).
+
 use super::implicit_base::{ImplicitModuleBase, ScalarParameter};
 use super::ImplicitModule;
 
 use std::rc::Rc;
 use std::cell::RefCell;
 
+/// ScaleOffset applies a scaling and translation factor to the output of its source function, as `v*scale+offset`.
 pub struct ImplicitScaleOffset {
     base: ImplicitModuleBase,
     source: ScalarParameter,

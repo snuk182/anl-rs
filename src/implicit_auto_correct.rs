@@ -1,3 +1,5 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html).
+
 use super::implicit_base::ImplicitModuleBase;
 use super::ImplicitModule;
 use super::utility::clamp;
@@ -6,6 +8,7 @@ use super::random_gen::{LCG, get_01};
 use std::rc::Rc;
 use std::cell::RefCell;
 
+/// The AutoCorrect module is a tool to help tame the wild beasts that are fractals. When a function is set as a source to AutoCorrect, the calculate() method is called. This method will sample the input function a number of times across a region of the domain, and attempt to calculate a set of "correction parameters" to remap the function's output to a different range. Multi-fractals especially are notorious for outputting values in odd ranges, and this function provides a drop-in method for correcting them. Due to the necessity of sampling the function a number of times, there is some processing overhead when calculate() is called.
 pub struct ImplicitAutoCorrect {
     base: ImplicitModuleBase,
     source: Option<Rc<RefCell<ImplicitModule>>>,

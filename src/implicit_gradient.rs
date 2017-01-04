@@ -1,6 +1,9 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html).
+
 use super::implicit_base::ImplicitModuleBase;
 use super::ImplicitModule;
 
+/// Gradient has the effect of allowing you to specify a line segment in N-dimensional space by setting endpoints. The endpoints are set via [`set_gradient()`](struct.ImplicitGradient.html) and the segment extends from P1=(x1,y1,z1,w1,u1,v1) to P2=(x2,y2,z2,w2,u2,v2). Only the coordinates pertinent to the dimensionality of the function being called are used, however. A gradient field is aligned with this segment such that any input coordinate is projected onto the line formed by the segment, and a value is assigned based on where on the line the projected point lies. If it lies on or beyond P1, the value is assigned as 0. If it lies on or beyond P2 the value is assigned as 1. Anything in between is assigned as a linear interpolation between 0 and 1. (This behavior may be changing; I may remove the clamping aspect, and allow values to go infinitely depending on distance from the "origin" point. Some useful things could be done in this fashion.) The result is a smooth gradient field oriented along an axis.
 pub struct ImplicitGradient {
     base: ImplicitModuleBase,
     gx1: f64,

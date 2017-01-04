@@ -1,3 +1,5 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html).
+
 use super::implicit_base::ImplicitModuleBase;
 use super::ImplicitModule;
 use super::utility::clamp;
@@ -5,6 +7,7 @@ use super::utility::clamp;
 use std::rc::Rc;
 use std::cell::RefCell;
 
+/// Clamp is useful for ensuring that the output of a function does not go beyond a specified range. And values beyond the given range will be clipped.
 pub struct ImplicitClamp {
     base: ImplicitModuleBase,
     source: Rc<RefCell<ImplicitModule>>,

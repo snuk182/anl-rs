@@ -1,3 +1,9 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html).
+///
+/// The basic idea of ANL is that functions are modular and may be connected together in chains to build more complex functions. All functions provide an interface allowing the function to be queried for a value. The interface provides methods for generating values in 2, 3, 4 or 6 dimensions. (The reason for providing such high orders of function is explained in the section on seamless noise.) Some modules are only generators, with no modifiable inputs or parameters, and are only connectable to other modules by being used as sources. Others are modifiers that somehow modify the output of another function; for these, other functions can be specified for the inputs.
+///
+/// The functions in ANL are organized into 2 main categories: Implicit functions and RGBA functions. Implicit functions are the noise functions that generate double-precision floating point output values. RGBA functions operate in RGBA space, and the values they output are 4-component single-precision floating point vectors representing RGBA colors. There are adapter functions that can take a number of Implicit functions and compose them into an RGBA function. As well, there is an adapter that can decompose an RGBA function, extracting a specified channel to be used as an Implicit source.
+
 #[macro_use]
 extern crate lazy_static;
 
@@ -49,6 +55,7 @@ mod implicit_saw_tooth;
 mod implicit_sphere;
 mod implicit_tiers;
 mod implicit_triangle;
+mod implicit_bright_contrast;
 
 mod rgba_blend;
 mod rgba_blend_ops;
@@ -95,6 +102,7 @@ pub use implicit_saw_tooth::*;
 pub use implicit_sphere::*;
 pub use implicit_tiers::*;
 pub use implicit_triangle::*;
+pub use implicit_bright_contrast::*;
 
 pub use rgba_blend::*;
 pub use rgba_blend_ops::*;

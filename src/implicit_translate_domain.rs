@@ -1,9 +1,12 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html).
+
 use super::implicit_base::{ImplicitModuleBase, ScalarParameter};
 use super::ImplicitModule;
 
 use std::rc::Rc;
 use std::cell::RefCell;
 
+/// TranslateDomain is used to translate the input coordinates of a function. Each axis is specifiable as a constant or noise source. This application of domain transformation is commonly called turbulence and is useful in generating many types of effects. 
 pub struct ImplicitTranslateDomain {
     base: ImplicitModuleBase,
     source: ScalarParameter,

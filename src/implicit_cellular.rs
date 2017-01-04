@@ -1,3 +1,5 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html).
+
 use super::implicit_base::ImplicitModuleBase;
 use super::ImplicitModule;
 use super::cellular_gen::*;
@@ -5,6 +7,7 @@ use super::cellular_gen::*;
 use std::rc::Rc;
 use std::cell::RefCell;
 
+/// The Cellular function provides an interface to a [`CellularGenerator`](struct.CellularGenerator.html) to generate cellular noise based on the function originally written by Steve Worley. The function calculates F1,F2,F3 and F4 as distances to the first, second, third and fourth nearest seed points, applies the specified coefficients to the distances and sums them together, returning the result.
 pub struct ImplicitCellular {
     base: ImplicitModuleBase,
     generator: Option<Rc<RefCell<CellularGenerator>>>,

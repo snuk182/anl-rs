@@ -1,7 +1,13 @@
+/// The documentation is taken from original [C++ library by Joshua Tippetts](http://accidentalnoise.sourceforge.net/docs.html).
+
 use super::implicit_base::ImplicitModuleBase;
 use super::{ScalarParameter, ImplicitModule};
 use super::utility::bias;
 
+/// Bias has the effect of applying the following function to the output of its source:
+///      `f(x)=pow(x, log(b)/log(0.5))`
+/// When applied to a function in the range of (0,1), this has the effect of "pushing" the values of the function toward 1 if b is greater than 0.5, or pushing them toward 0 if b is less than 0.5. In effect, it "biases" the function toward one end of the range or the other.
+/// `source` and `b` are scalar parameters. They default to 0 and 0.5, respectively, and may be overridden with either another constant or with a function source.
 pub struct ImplicitBias {
     base: ImplicitModuleBase,
     source: ScalarParameter,
